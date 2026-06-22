@@ -21,6 +21,8 @@
 /build
 
 # misc
+.idea/
+.claude/
 .DS_Store
 *.pem
 
