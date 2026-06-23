@@ -1,9 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  AdvancedPlayer,
-  MergedPlayer,
-  TraditionalPlayer,
-} from "@/types/euroleague";
+import { AdvancedPlayer, TraditionalPlayer } from "@/types/euroleague";
 import { fetchAdvanced, fetchTraditional } from "@/lib/euroleague-api";
 
 export function usePlayersData() {
@@ -20,13 +16,11 @@ export function usePlayersData() {
           pObj,
         ])
       );
-      const mergedPlayers: MergedPlayer[] = traditional.map(
-        (pObj: TraditionalPlayer) => {
-          const trad = advancedMap.get(pObj.player.code);
-          return { ...pObj, ...trad };
-        }
-      );
-      return mergedPlayers;
+
+      return traditional.map((pObj: TraditionalPlayer) => {
+        const trad = advancedMap.get(pObj.player.code);
+        return { ...pObj, ...trad };
+      });
     },
   });
 }
