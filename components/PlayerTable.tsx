@@ -12,6 +12,7 @@ export default function PlayerTable({ mergedPlayersArray }: PlayerTableProps) {
         <thead>
           <tr className="bg-gray-200">
             <th className="border border-gray-500 p-2">Rank</th>
+            <th className="border border-gray-500 p-2">Team</th>
             <th className="border border-gray-500 p-2">Name</th>
             <th className="border border-gray-500 p-2">PPG</th>
             <th className="border border-gray-500 p-2">APG</th>
@@ -23,6 +24,9 @@ export default function PlayerTable({ mergedPlayersArray }: PlayerTableProps) {
           {mergedPlayersArray.map((p: MergedPlayer, index: number) => (
             <tr key={p.player.code}>
               <td className="border border-gray-500 p-2">{index + 1}</td>
+              <td className="border border-gray-500 p-2">
+                {p.player.team.name}
+              </td>
               <td className="border border-gray-500 p-2">{p.player.name}</td>
               <td className="border border-gray-500 p-2">{p.pointsScored}</td>
               <td className="border border-gray-500 p-2">{p.assists}</td>
