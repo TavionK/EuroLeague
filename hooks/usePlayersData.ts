@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { AdvancedPlayer, TraditionalPlayer } from "@/types/euroleague";
+import {
+  AdvancedPlayer,
+  MergedPlayer,
+  TraditionalPlayer,
+} from "@/types/euroleague";
 import { fetchAdvanced, fetchTraditional } from "@/lib/euroleague-api";
 
 export function usePlayersData() {
   return useQuery({
     queryKey: ["players"],
-    queryFn: async () => {
+    queryFn: async (): Promise<MergedPlayer[]> => {
       const [traditional, advanced] = await Promise.all([
         fetchTraditional(),
         fetchAdvanced(),
@@ -17,10 +21,14 @@ export function usePlayersData() {
         ])
       );
 
-      return traditional.map((pObj: TraditionalPlayer) => {
-        const trad = advancedMap.get(pObj.player.code);
-        return { ...pObj, ...trad };
-      });
+      return traditional.map(
+        (traditionalPlayer: TraditionalPlayer): MergedPlayer => {
+          return {
+            ...traditionalPlayer,
+            ...advancedMap.get(traditionalPlayer.player.code),
+          } as MergedPlayer;
+        }
+      );
     },
   });
 }
