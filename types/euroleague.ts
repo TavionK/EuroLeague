@@ -84,5 +84,4 @@ export type SortCategories =
   | "pir"
   | "pointsScored"
   | "totalRebounds"
-  | "assists"
-  | "name";
+  | "assists";

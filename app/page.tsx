@@ -14,16 +14,13 @@ export default function Home() {
 
   function sortArr(arr: MergedPlayer[]): MergedPlayer[] {
     const sortedArr: MergedPlayer[] = [...arr];
-    sortedArr.sort((a: MergedPlayer, b: MergedPlayer) => {
-      if (typeof a[sortCategory] === "number") {
-        if (sortDir === "asc") {
-          return a[sortCategory] - b[sortCategory];
-        }
-        // descending - Higher first
-        else {
-          return -(a[sortCategory] - b[sortCategory]);
-        }
-      } else {
+    sortedArr.sort((a: MergedPlayer, b: MergedPlayer): number => {
+      if (sortDir === "asc") {
+        return a[sortCategory] - b[sortCategory];
+      }
+      // descending - Higher first
+      else {
+        return -(a[sortCategory] - b[sortCategory]);
       }
     });
     return sortedArr;
