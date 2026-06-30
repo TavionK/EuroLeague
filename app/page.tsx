@@ -11,10 +11,23 @@ import {
 
 export default function Home() {
   const result = usePlayersData();
-  console.log(result);
 
   const [sortDir, setSortDir] = useState<SortDirection>("desc");
   const [sortCategory, setSortCategory] = useState<SortCategories>("pir");
+
+  function filterArr(arr: MergedPlayer[]): MergedPlayer[] {
+    const input = "ve"; //Just for testing purposes
+
+    return arr.filter((p: MergedPlayer) => {
+      const teamName: string = p.player.team.name.toLowerCase();
+      const playerName: string = p.player.name.toLowerCase();
+      if (teamName.includes(input.toLowerCase())) {
+        return p;
+      } else if (playerName.includes(input.toLowerCase())) {
+        return p;
+      }
+    });
+  }
 
   function sortArr(arr: MergedPlayer[]): MergedPlayer[] {
     const sortedArr: MergedPlayer[] = [...arr];
@@ -33,9 +46,10 @@ export default function Home() {
   let res;
   switch (result.status) {
     case "success":
-      console.log("success");
       if (result.data.length > 0) {
-        const sortedArr: MergedPlayer[] = sortArr(result.data);
+        const filteredArr: MergedPlayer[] = filterArr(result.data);
+
+        const sortedArr: MergedPlayer[] = sortArr(filteredArr);
         res = (
           <PlayerTable
             mergedPlayersArray={sortedArr}
