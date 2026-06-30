@@ -79,3 +79,10 @@ export interface MergedPlayer extends TraditionalPlayer {
   freeThrowsRate: string;
   possesions: number;
 }
+
+export type SortCategories =
+  | "pir"
+  | "pointsScored"
+  | "totalRebounds"
+  | "assists"
+  | "name";
