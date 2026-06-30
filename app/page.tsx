@@ -3,13 +3,17 @@ import { usePlayersData } from "@/hooks/usePlayersData";
 import { ErrorState, EmptyState, LoadingState } from "@/components/TableStates";
 import PlayerTable from "@/components/PlayerTable";
 import { useState } from "react";
-import { MergedPlayer, SortCategories } from "@/types/euroleague";
+import {
+  MergedPlayer,
+  SortCategories,
+  SortDirection,
+} from "@/types/euroleague";
 
 export default function Home() {
   const result = usePlayersData();
   console.log(result);
 
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [sortDir, setSortDir] = useState<SortDirection>("desc");
   const [sortCategory, setSortCategory] = useState<SortCategories>("pir");
 
   function sortArr(arr: MergedPlayer[]): MergedPlayer[] {
@@ -35,7 +39,10 @@ export default function Home() {
         res = (
           <PlayerTable
             mergedPlayersArray={sortedArr}
+            sortCategory={sortCategory}
             setSortCategory={setSortCategory}
+            sortDir={sortDir}
+            setSortDir={setSortDir}
           />
         );
       } else {

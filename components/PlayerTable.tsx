@@ -1,17 +1,35 @@
-import { MergedPlayer, SortCategories } from "@/types/euroleague";
+import {
+  MergedPlayer,
+  SortCategories,
+  SortDirection,
+} from "@/types/euroleague";
 
 interface PlayerTableProps {
   mergedPlayersArray: MergedPlayer[];
   setSortCategory: (category: SortCategories) => void;
+  sortCategory: SortCategories;
+  sortDir: SortDirection;
+  setSortDir: (direction: SortDirection) => void;
 }
 
 export default function PlayerTable({
   mergedPlayersArray,
   setSortCategory,
+  setSortDir,
+  sortCategory,
+  sortDir,
 }: PlayerTableProps) {
-  console.log(mergedPlayersArray);
-  function setNewSortCategory(category: SortCategories) {
-    setSortCategory(category);
+  function setNewSortCategory(category: SortCategories): void {
+    if (category !== sortCategory) {
+      setSortDir("desc");
+      setSortCategory(category);
+    } else {
+      if (sortDir === "asc") {
+        setSortDir("desc");
+      } else {
+        setSortDir("asc");
+      }
+    }
     console.log("clicked");
   }
 
@@ -23,29 +41,21 @@ export default function PlayerTable({
             <th className="border border-gray-500 p-2">Rank</th>
             <th className="border border-gray-500 p-2">Team</th>
             <th className="border border-gray-500 p-2">Name</th>
-            <th
-              onClick={() => setNewSortCategory("pointsScored")}
-              className="border border-gray-500 p-2"
-            >
-              PPG
+            <th className="border border-gray-500 p-2">
+              <button onClick={() => setNewSortCategory("pointsScored")}>
+                PPG
+              </button>
             </th>
-            <th
-              onClick={() => setNewSortCategory("assists")}
-              className="border border-gray-500 p-2"
-            >
-              APG
+            <th className="border border-gray-500 p-2">
+              <button onClick={() => setNewSortCategory("assists")}>APG</button>
             </th>
-            <th
-              onClick={() => setNewSortCategory("totalRebounds")}
-              className="border border-gray-500 p-2"
-            >
-              RPG
+            <th className="border border-gray-500 p-2">
+              <button onClick={() => setNewSortCategory("totalRebounds")}>
+                RPG
+              </button>
             </th>
-            <th
-              onClick={() => setNewSortCategory("pir")}
-              className="border border-gray-500 p-2"
-            >
-              PIR
+            <th className="border border-gray-500 p-2">
+              <button onClick={() => setNewSortCategory("pir")}>PIR</button>
             </th>
           </tr>
         </thead>
