@@ -85,3 +85,5 @@ export type SortCategories =
   | "pointsScored"
   | "totalRebounds"
   | "assists";
+
+export type SortDirection = "asc" | "desc";
