@@ -4,6 +4,10 @@ import {
   SortDirection,
 } from "@/types/euroleague";
 
+import { CircleQuestionMark } from "lucide-react";
+import { Popover } from "radix-ui";
+import Link from "next/link";
+
 interface PlayerTableProps {
   mergedPlayersArray: MergedPlayer[];
   setSortCategory: (category: SortCategories) => void;
@@ -50,12 +54,39 @@ export default function PlayerTable({
               <button onClick={() => setNewSortCategory("assists")}>APG</button>
             </th>
             <th className="border border-gray-500 p-2">
-              <button onClick={() => setNewSortCategory("totalRebounds")}>
+              <button onClick={(): void => setNewSortCategory("totalRebounds")}>
                 RPG
               </button>
             </th>
             <th className="border border-gray-500 p-2">
-              <button onClick={() => setNewSortCategory("pir")}>PIR</button>
+              <div className="flex items-center justify-between">
+                <button onClick={(): void => setNewSortCategory("pir")}>
+                  PIR
+                </button>
+                <Popover.Root>
+                  <Popover.Trigger
+                    className="Trigger"
+                    aria-label="What is PIR?"
+                  >
+                    <CircleQuestionMark aria-hidden="true" />
+                  </Popover.Trigger>
+                  <Popover.Portal>
+                    <Popover.Content sideOffset={3}>
+                      <Popover.Arrow className="fill-gray-400" />
+                      <div className="rounded-md bg-gray-400 p-3">
+                        <p>
+                          PIR combines everything a player does well, and
+                          subtracts everything that hurts their team, into one
+                          number.{" "}
+                        </p>
+                        <Link href="/pir" className="underline">
+                          Learn More about PIR.
+                        </Link>
+                      </div>
+                    </Popover.Content>
+                  </Popover.Portal>
+                </Popover.Root>
+              </div>
             </th>
           </tr>
         </thead>
