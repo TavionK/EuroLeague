@@ -34,7 +34,6 @@ export default function PlayerTable({
         setSortDir("asc");
       }
     }
-    console.log("clicked");
   }
 
   return (
@@ -45,20 +44,56 @@ export default function PlayerTable({
             <th className="border border-gray-500 p-2">Rank</th>
             <th className="border border-gray-500 p-2">Team</th>
             <th className="border border-gray-500 p-2">Name</th>
-            <th className="border border-gray-500 p-2">
+            <th
+              aria-sort={
+                sortCategory === "pointsScored"
+                  ? sortDir === "asc"
+                    ? "ascending"
+                    : "descending"
+                  : "none"
+              }
+              className="border border-gray-500 p-2"
+            >
               <button onClick={() => setNewSortCategory("pointsScored")}>
                 PPG
               </button>
             </th>
-            <th className="border border-gray-500 p-2">
+            <th
+              aria-sort={
+                sortCategory === "assists"
+                  ? sortDir === "asc"
+                    ? "ascending"
+                    : "descending"
+                  : "none"
+              }
+              className="border border-gray-500 p-2"
+            >
               <button onClick={() => setNewSortCategory("assists")}>APG</button>
             </th>
-            <th className="border border-gray-500 p-2">
+            <th
+              aria-sort={
+                sortCategory === "totalRebounds"
+                  ? sortDir === "asc"
+                    ? "ascending"
+                    : "descending"
+                  : "none"
+              }
+              className="border border-gray-500 p-2"
+            >
               <button onClick={(): void => setNewSortCategory("totalRebounds")}>
                 RPG
               </button>
             </th>
-            <th className="border border-gray-500 p-2">
+            <th
+              aria-sort={
+                sortCategory === "pir"
+                  ? sortDir === "asc"
+                    ? "ascending"
+                    : "descending"
+                  : "none"
+              }
+              className="border border-gray-500 p-2"
+            >
               <div className="flex items-center justify-between">
                 <button onClick={(): void => setNewSortCategory("pir")}>
                   PIR
