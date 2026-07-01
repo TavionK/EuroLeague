@@ -67,16 +67,20 @@ export default function Home() {
       if (result.data.length > 0) {
         const filteredArr: MergedPlayer[] = filterArr(result.data);
 
-        const sortedArr: MergedPlayer[] = sortArr(filteredArr);
-        res = (
-          <PlayerTable
-            mergedPlayersArray={sortedArr}
-            sortCategory={sortCategory}
-            setSortCategory={setSortCategory}
-            sortDir={sortDir}
-            setSortDir={setSortDir}
-          />
-        );
+        if (filteredArr.length > 0) {
+          const sortedArr: MergedPlayer[] = sortArr(filteredArr);
+          res = (
+            <PlayerTable
+              mergedPlayersArray={sortedArr}
+              sortCategory={sortCategory}
+              setSortCategory={setSortCategory}
+              sortDir={sortDir}
+              setSortDir={setSortDir}
+            />
+          );
+        } else {
+          res = <EmptyState message={"No players match your search"} />;
+        }
       } else {
         res = <EmptyState />;
       }
