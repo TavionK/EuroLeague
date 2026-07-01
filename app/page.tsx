@@ -100,6 +100,7 @@ export default function Home() {
         type="text"
         value={searchTerm}
         onChange={handleSearchTermChange}
+        placeholder="Enter player or team name"
       />
       {res}
     </main>
