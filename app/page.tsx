@@ -12,20 +12,38 @@ import {
 export default function Home() {
   const result = usePlayersData();
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortDir, setSortDir] = useState<SortDirection>("desc");
   const [sortCategory, setSortCategory] = useState<SortCategories>("pir");
 
-  function filterArr(arr: MergedPlayer[]): MergedPlayer[] {
-    const input = "ve"; //Just for testing purposes
+  function handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchTerm(e.target.value);
+  }
 
-    return arr.filter((p: MergedPlayer) => {
+  function normalizeName(name: string): string {
+    const parts: string[] = name
+      .split(".,")
+      .map((name: string): string => name.trim());
+    if (parts.length === 2) {
+      return `${parts[1]}, ${parts[0]}`.toLowerCase();
+    }
+    return name.toLowerCase();
+  }
+
+  function filterArr(arr: MergedPlayer[]): MergedPlayer[] {
+    const tokens: string[] = searchTerm
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+    if (tokens.length === 0) return arr;
+
+    return arr.filter((p: MergedPlayer): boolean => {
       const teamName: string = p.player.team.name.toLowerCase();
-      const playerName: string = p.player.name.toLowerCase();
-      if (teamName.includes(input.toLowerCase())) {
-        return p;
-      } else if (playerName.includes(input.toLowerCase())) {
-        return p;
-      }
+      const playerName: string = normalizeName(p.player.name);
+      const haystack: string = `${playerName} ${teamName}`;
+
+      return tokens.every((token: string) => haystack.includes(token));
     });
   }
 
@@ -75,8 +93,14 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <h1>Player Leaderboard</h1>
+    <main className="flex flex-col items-center justify-center">
+      <h1 className="text-center">Player Leaderboard</h1>
+      <input
+        className="mb-4 border-2 border-gray-600"
+        type="text"
+        value={searchTerm}
+        onChange={handleSearchTermChange}
+      />
       {res}
     </main>
   );
