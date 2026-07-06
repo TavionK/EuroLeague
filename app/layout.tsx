@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "EuroLeague Stats",
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className={`h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <QueryProvider>{children}</QueryProvider>
+        <Footer />
       </body>
     </html>
   );
