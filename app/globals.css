@@ -1,17 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --warm-bone: #F7F5F0;
+  --ink-navy: #151D2E;
+  --ledger-green: #2E8B57;
+  --ledger-rust: #C0392B;
+  --scoreboard-amber: #E8A33D;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--warm-bone);
   --color-foreground: var(--foreground);
+  --color-ink-navy: var(--ink-navy);
+  --color-warm-bone: var(--ink-navy);
+  --color-ledger-rust: var(--ledger-rust);
+  --color-ledeger-green: var(--ledger-green);
+  --color-scoreboard-amber: var(--scoreboard-amber);
 }
 
 body {
-  background: var(--background);
+  background: var(--color-background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
