@@ -3,6 +3,7 @@ import { usePlayersData } from "@/hooks/usePlayersData";
 import { ErrorState, EmptyState, LoadingState } from "@/components/TableStates";
 import PlayerTable from "@/components/PlayerTable";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   MergedPlayer,
   SortCategories,
@@ -11,14 +12,11 @@ import {
 
 export default function Home() {
   const result = usePlayersData();
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get("q") ?? "";
 
-  const [searchTerm, setSearchTerm] = useState("");
   const [sortDir, setSortDir] = useState<SortDirection>("desc");
   const [sortCategory, setSortCategory] = useState<SortCategories>("pir");
-
-  function handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchTerm(e.target.value);
-  }
 
   function normalizeName(name: string): string {
     const parts: string[] = name
@@ -99,13 +97,6 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center">
       <h1 className="text-center">Player Leaderboard</h1>
-      <input
-        className="mb-4 border-2 border-gray-600"
-        type="text"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
-        placeholder="Enter player or team name"
-      />
       {res}
     </main>
   );
