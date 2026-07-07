@@ -3,6 +3,7 @@
 :root {
   --warm-bone: #F7F5F0;
   --ink-navy: #151D2E;
+  --nav-bg: #0D1320;
   --ledger-green: #2E8B57;
   --ledger-rust: #C0392B;
   --scoreboard-amber: #E8A33D;
@@ -14,9 +15,10 @@
   --color-background: var(--warm-bone);
   --color-foreground: var(--foreground);
   --color-ink-navy: var(--ink-navy);
+  --color-nav-bg: var(--nav-bg);
   --color-warm-bone: var(--warm-bone);
   --color-ledger-rust: var(--ledger-rust);
-  --color-ledeger-green: var(--ledger-green);
+  --color-ledger-green: var(--ledger-green);
   --color-scoreboard-amber: var(--scoreboard-amber);
   --color-navy-green: var(--navy-green);
   --color-navy-rust: var(--navy-rust);
